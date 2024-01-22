@@ -1,0 +1,34 @@
+# DO NOT include azure-functions-worker in this file
+# The Python Worker is managed by Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
+
+azure-functions
+python-dotenv
+mysql>=0.0.3
+mysql-connector-python>=8.0.26
+mysql-connector
+mysqlclient>=2.0.3
+PyMySQL >=1.0.2
+pandas>=1.2.4
+requests>=2.25.1
+SQLAlchemy>=1.4.18
+azure-storage-blob>=12.8.1
+telepot
+xlrd
+numpy
+certifi>=2020.12.5
+chardet>=4.0.0
+html5lib>=1.1
+idna>=2.10
+requests>=2.25.1
+sharepy==1.3.0
+six>=1.15.0
+urllib3>=1.26.4
+webencodings>=0.5.1
+openpyxl>=3.0.7
+Levenshtein
+cryptography==3.4.8
+credenciais-matrix @ git+https://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@github.com/Matrix-Energia/matrix.credenciais.git
+acessobancomatrix @ git+https://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@github.com/Matrix-Energia/matrix.acesso.banco.git
+dir_funcs @ git+https://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@github.com/Matrix-Energia/matrix.pacote.calculadora.tarifaria.git
+sharematrix @ git+https://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@github.com/jdnzdavila/Sharepoint_Matrix.git
