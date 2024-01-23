@@ -1,0 +1,954 @@
+---
+openapi: 3.1.0
+info:
+  title: FastAPI
+  version: 0.1.0
+paths:
+  "/dsp_email_sender":
+    post:
+      summary: Dsp Email Response
+      operationId: dsp_email_response_dsp_email_sender_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/DSP_structure"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/name_generator":
+    get:
+      summary: Random Name Generator
+      operationId: random_name_generator_name_generator_get
+      parameters:
+      - required: true
+        schema:
+          type: integer
+          title: Size
+        name: size
+        in: query
+      - required: false
+        schema:
+          type: string
+          title: Gender
+          default: random
+        name: gender
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/name_dataset":
+    post:
+      summary: Random Name Dataset
+      operationId: random_name_dataset_name_dataset_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items: {}
+              type: array
+              title: Name List
+              default:
+              - Brian Stollsteimer
+              - Robert Turner
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/quota_calculator":
+    get:
+      summary: Calc Individual Quota
+      operationId: calc_individual_quota_quota_calculator_get
+      parameters:
+      - required: true
+        schema:
+          type: integer
+          title: O
+        name: o
+        in: query
+      - required: true
+        schema:
+          type: integer
+          title: N
+        name: n
+        in: query
+      - required: true
+        schema:
+          type: integer
+          title: T
+        name: t
+        in: query
+      - required: true
+        schema:
+          type: number
+          title: Dim
+        name: dim
+        in: query
+      - required: true
+        schema:
+          type: integer
+          title: Qi
+        name: qi
+        in: query
+      - required: true
+        schema:
+          type: number
+          title: Qt
+        name: qt
+        in: query
+      - required: true
+        schema:
+          type: number
+          title: Pt
+        name: pt
+        in: query
+      - required: false
+        schema:
+          type: string
+          title: Method
+          default: alfa
+        name: method
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/fill_db":
+    post:
+      summary: Members Database
+      operationId: members_database_fill_db_post
+      parameters:
+      - required: false
+        schema:
+          type: string
+          title: Start Date
+          default: YYYY/MM/DD
+        name: start_date
+        in: query
+      - required: false
+        schema:
+          type: boolean
+          title: Start Date Random
+          default: true
+        name: start_date_random
+        in: query
+      - required: false
+        schema:
+          type: boolean
+          title: Random N
+          default: true
+        name: random_N
+        in: query
+      - required: false
+        schema:
+          type: boolean
+          title: Random Dim
+          default: true
+        name: random_DIM
+        in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/members_structure"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/sp_stocks":
+    get:
+      summary: Get Stocks
+      operationId: get_stocks_sp_stocks_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/generate_offers":
+    post:
+      summary: Random Offers
+      operationId: random_offers_generate_offers_post
+      parameters:
+      - required: false
+        schema:
+          type: string
+          title: Dsp Target
+          default: open health
+        name: dsp_target
+        in: query
+      - required: false
+        schema:
+          type: number
+          title: Price
+          default: 100
+        name: price
+        in: query
+      - required: false
+        schema:
+          type: string
+          title: Offer Creation Date
+          default: YYYY/MM/DD
+        name: offer_creation_date
+        in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/off_info"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/multiple_offer_loop":
+    post:
+      summary: Off Loop
+      operationId: off_loop_multiple_offer_loop_post
+      parameters:
+      - required: false
+        schema:
+          type: integer
+          title: Length
+          default: 5
+        name: length
+        in: query
+      - required: false
+        schema:
+          type: boolean
+          title: Rand Price
+          default: true
+        name: rand_price
+        in: query
+      - required: false
+        schema:
+          type: integer
+          title: Price
+          default: 100
+        name: price
+        in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Plan Info
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/plot_g":
+    post:
+      summary: Plt Graph
+      operationId: plt_graph_plot_g_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PLT_structure"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/dsp_distribution_calc":
+    post:
+      summary: Dist Calc
+      operationId: dist_calc_dsp_distribution_calc_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Qa_Dist_Calc"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/df_to_html":
+    post:
+      summary: Df To Html
+      operationId: df_to_html_df_to_html_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/df_html_class"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/datasavings_html":
+    post:
+      summary: Ds Html
+      operationId: ds_html_datasavings_html_post
+      parameters:
+      - required: false
+        schema:
+          type: boolean
+          title: Members Full Df
+          default: false
+        name: members_full_df
+        in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/def_html"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    DSP_structure:
+      properties:
+        dsp:
+          type: string
+          title: Dsp
+          default: open health
+        start_date:
+          type: string
+          title: Start Date
+          default: '2023-01-01'
+        members_start_date_random:
+          type: boolean
+          title: Members Start Date Random
+          default: true
+        members_full_df:
+          type: boolean
+          title: Members Full Df
+          default: false
+        random_N:
+          type: boolean
+          title: Random N
+          default: true
+        random_DIM:
+          type: boolean
+          title: Random Dim
+          default: true
+        n_members:
+          type: integer
+          title: N Members
+          default: 0
+        calculation_method:
+          type: string
+          title: Calculation Method
+          default: alfa
+        offer_n:
+          type: integer
+          title: Offer N
+          default: 0
+        offer_p_random:
+          type: boolean
+          title: Offer P Random
+          default: true
+        min_offer_p:
+          type: integer
+          title: Min Offer P
+          default: 1000
+        qi:
+          type: integer
+          title: Qi
+          default: 100
+        pt:
+          type: number
+          title: Pt
+          default: 0.75
+        receiver_email:
+          type: string
+          title: Receiver Email
+          default: youremail@drumwave.com
+      type: object
+      title: DSP_structure
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PLT_structure:
+      properties:
+        qa_df:
+          type: object
+          title: Qa Df
+          default:
+            name:
+            - You
+            - Me
+            - Us
+            - Them
+            - Drumwave team US
+            - DrumWave team BR
+            cash:
+            - 50.5
+            - 200.72
+            - 700.2
+            - 500.44
+            - 300.97
+            - 340.74
+        path:
+          type: string
+          title: Path
+          default: C:\user\img.png
+        n_bars:
+          type: integer
+          title: N Bars
+          default: 5
+      type: object
+      title: PLT_structure
+    Qa_Dist_Calc:
+      properties:
+        plan_info:
+          type: object
+          title: Plan Info
+          default:
+            open health:
+              id: HC_001
+              category: health care
+              ns:
+              - Blood Test
+              - Glicose Level
+              - Mamography
+              - X-Ray
+              start_date: '2022-01-01'
+              payment_freq_M: 12
+        offers:
+          type: object
+          title: Offers
+          default:
+            A_1:
+              A_1:
+                creator_id: A__DW
+                offer_name: Offer Example
+                creation_date: '2023-4-1'
+                product:
+                  offer_category: buy
+                  offer_type: dsp
+                  description: descript
+                  end_use: BRD
+                  period:
+                    unit: M
+                    value: 4
+                  frequency:
+                    unit: H
+                    value: 36
+                  target: public
+                  ns_attributes:
+                  - GL
+                  terms_conditions: XXX
+                price:
+                  monetization_engine: cash_now
+                  payment_terms: upfront
+                  price:
+                    unit: BRL
+                    value: 100
+                  share_custody_tc: '50%/50% '
+                  delivery: virtual
+                place:
+                  region: br
+                promotion:
+                  offer_duration:
+                    unit: D
+                    value: 6
+                  offer_promotion: 'False'
+                  front_end: ''
+            B_1:
+              B_1:
+                creator_id: B__DW
+                offer_name: Offer 2
+                creation_date: '2023-1-1'
+                product:
+                  offer_category: sell
+                  offer_type: dsp
+                  description: Descript
+                  end_use: licensing
+                  period:
+                    unit: M
+                    value: 8
+                  frequency:
+                    unit: RT
+                    value: 1
+                  target:
+                    targeted: open finance
+                  ns_attributes:
+                  - cc
+                  terms_conditions: XXXXXXX
+                price:
+                  monetization_engine: cash_now
+                  payment_terms: upfront
+                  price:
+                    unit: BRL
+                    value: 10000
+                  share_custody_tc: 50%/50%
+                  delivery: virtual
+                place:
+                  region: us
+                promotion:
+                  offer_duration:
+                    unit: H
+                    value: 8
+                  offer_promotion: 'False'
+                  front_end: ''
+        member_ns_df:
+          type: object
+          title: Member Ns Df
+          default:
+            dw_id:
+              '0': ED_001
+              '1': ED_001
+              '2': ED_001
+              '3': EM_001
+              '4': EM_001
+            name:
+              '0': Edna Wallace
+              '1': Edna Wallace
+              '2': Edna Wallace
+              '3': Emily Odonnell
+              '4': Emily Odonnell
+            id_type:
+              '0': RG
+              '1': RG
+              '2': RG
+              '3': RG
+              '4': RG
+            id_number:
+              '0': 15.582.333-02
+              '1': 15.582.333-02
+              '2': 15.582.333-02
+              '3': 67.730.146-84
+              '4': 67.730.146-84
+            gender:
+              '0': female
+              '1': female
+              '2': female
+              '3': female
+              '4': female
+            age:
+              '0': 81
+              '1': 81
+              '2': 81
+              '3': 52
+              '4': 52
+            height:
+              '0': 1
+              '1': 1
+              '2': 1
+              '3': 1.12
+              '4': 1.12
+            weight:
+              '0': 100
+              '1': 100
+              '2': 100
+              '3': 52
+              '4': 52
+            address:
+              '0': 4632 Vermont 15
+              '1': 4632 Vermont 15
+              '2': 4632 Vermont 15
+              '3': 40902 Ingersoll Terrace
+              '4': 40902 Ingersoll Terrace
+            city:
+              '0': Wolcott
+              '1': Wolcott
+              '2': Wolcott
+              '3': Fremont
+              '4': Fremont
+            state:
+              '0': VT
+              '1': VT
+              '2': VT
+              '3': CA
+              '4': CA
+            zip:
+              '0': '05680'
+              '1': '05680'
+              '2': '05680'
+              '3': '94538'
+              '4': '94538'
+            start_date:
+              '0': '2023-02-01'
+              '1': '2023-02-01'
+              '2': '2023-04-01'
+              '3': '2023-04-01'
+              '4': '2023-12-01'
+            ns:
+              '0': CBC
+              '1': CEA
+              '2': GL
+              '3': CBC
+              '4': CEA
+            N:
+              '0': 50
+              '1': 34
+              '2': 73
+              '3': 7
+              '4': 53
+            DIM:
+              '0': 7
+              '1': 5
+              '2': 5
+              '3': 5
+              '4': 7
+        qi:
+          type: integer
+          title: Qi
+          default: 100
+        pt:
+          type: number
+          title: Pt
+          default: 0.75
+        method:
+          type: string
+          title: Method
+          default: alfa
+      type: object
+      title: Qa_Dist_Calc
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    def_html:
+      properties:
+        plan_info:
+          type: object
+          title: Plan Info
+          default:
+            open health:
+              id: HC_001
+              category: health care
+              ns:
+              - CBC
+              - CEA
+              - GL
+              start_date: '2023-01-01'
+              payment_freq_M: 12
+        calc_dicty:
+          type: object
+          title: Calc Dicty
+          default:
+            qa_df:
+              name:
+                '0': Elizabeth Irving
+                '1': Dustin Alexander
+                '2': Nelda Hatcher
+              qa:
+                '0': 0.13
+                '1': 0.59
+                '2': 0.66
+              cash:
+                '0': 108.68
+                '1': 480.86
+                '2': 539.21
+            m: 10000
+            qi: 100
+            qt: 10000
+            pt: 0.75
+            formula: "(((Qt * T)*Pt + N*DIM*(1-Pt))*(1+O))/Qt = Standard Base LiNe
+              Formula"
+            pay_formula: alfa
+            members_df:
+              dw_id:
+                '0': EL_001
+                '1': EL_001
+                '2': DU_001
+              name:
+                '0': Elizabeth Irving
+                '1': Elizabeth Irving
+                '2': Dustin Alexander
+              id_type:
+                '0': RG
+                '1': RG
+                '2': RG
+              id_number:
+                '0': 41.071.082-03
+                '1': 41.071.082-03
+                '2': 41.730.754-84
+              gender:
+                '0': female
+                '1': female
+                '2': female
+              age:
+                '0': 47
+                '1': 47
+                '2': 18
+              height:
+                '0': 1
+                '1': 1
+                '2': 1.9
+              weight:
+                '0': 94
+                '1': 94
+                '2': 100
+              address:
+                '0': 10340 West 62nd Place
+                '1': 10340 West 62nd Place
+                '2': 34 Belair Drive
+              city:
+                '0': Arvada
+                '1': Arvada
+                '2': Holbrook
+              state:
+                '0': CO
+                '1': CO
+                '2': MA
+              zip:
+                '0': '80004'
+                '1': '80004'
+                '2': '02343'
+              start_date:
+                '0': '2023-02-01'
+                '1': '2023-02-01'
+                '2': '2023-03-01'
+              ns:
+                '0': CBC
+                '1': GL
+                '2': CBC
+              N:
+                '0': 20
+                '1': 11
+                '2': 66
+              DIM:
+                '0': 5
+                '1': 9
+                '2': 9
+              o:
+                '0': 4
+                '1': 4
+                '2': 4
+              t:
+                '0': 2
+                '1': 2
+                '2': 2
+              qa:
+                '0': 0.133
+                '1': 0.13
+                '2': 0.59
+              cash:
+                '0': 108.68
+                '1': 108.67
+                '2': 480.85
+            offer_html: "<html><p>HTML Example: Offers </p></html>"
+      type: object
+      title: def_html
+    df_html_class:
+      properties:
+        df:
+          type: object
+          title: Df
+          default:
+            name:
+              '0': Edna Wallace
+              '1': Edna Wallace
+              '2': Edna Wallace
+              '3': Emily Odonnell
+              '4': Emily Odonnell
+            id_number:
+              '0': 15.582.333-02
+              '1': 15.582.333-02
+              '2': 15.582.333-02
+              '3': 67.730.146-84
+              '4': 67.730.146-84
+            gender:
+              '0': female
+              '1': female
+              '2': female
+              '3': female
+              '4': female
+            age:
+              '0': 81
+              '1': 81
+              '2': 81
+              '3': 52
+              '4': 52
+            zip:
+              '0': '05680'
+              '1': '05680'
+              '2': '05680'
+              '3': '94538'
+              '4': '94538'
+            ns:
+              '0': CBC
+              '1': CEA
+              '2': GL
+              '3': CBC
+              '4': CEA
+            DIM:
+              '0': 7
+              '1': 5
+              '2': 5
+              '3': 5
+              '4': 7
+        qi:
+          type: integer
+          title: Qi
+          default: 100
+        pt:
+          type: number
+          title: Pt
+          default: 0.75
+        method:
+          type: string
+          title: Method
+          default: alfa
+      type: object
+      title: df_html_class
+    members_structure:
+      properties:
+        members:
+          items: {}
+          type: array
+          title: Members
+          default:
+          - Your name
+          - My name
+        plan_info:
+          type: object
+          title: Plan Info
+          default:
+            open health:
+              id: HC_001
+              category: health care
+              ns:
+              - Blood Test
+              - Glicose Level
+              - Mamography
+              - X-Ray
+              start_date: '2022-01-01'
+              payment_freq_M: 12
+      type: object
+      title: members_structure
+    off_info:
+      properties:
+        company_info:
+          type: object
+          title: Company Info
+          default:
+            ticker: ITUB4
+            company: Itau Unibanco
+            industry: Finance
+        ns_list:
+          items: {}
+          type: array
+          title: Ns List
+          default:
+          - fatura_cartao
+          - credito_consignado
+          - despesas_restaurante
+      type: object
+      title: off_info
