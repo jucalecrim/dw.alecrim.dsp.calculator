@@ -16,7 +16,6 @@ mime
 email-to
 email-validator
 backports.tempfile
-temp
 json
 json5
 logging
@@ -31,3 +30,4 @@ fastapi==0.99.1
 tempfile
 typing_extensions==4.7.1
 pydantic==1.10.8
+temp
