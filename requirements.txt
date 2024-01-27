@@ -5,7 +5,7 @@ random2
 pandas
 datetime
 python-dateutil
-math 
+python-math
 mpmath
 numpy
 requests
