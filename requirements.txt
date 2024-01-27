@@ -2,7 +2,6 @@
 names==0.3.0
 random-address==1.1.1
 random2
-mkl-random
 pandas
 datetime
 python-dateutil
