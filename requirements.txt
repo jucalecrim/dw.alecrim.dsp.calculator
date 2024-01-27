@@ -18,7 +18,7 @@ backports.tempfile
 temp
 fastapi 
 typing
-pydantic
+pydantic==1.10.8
 json
 json5
 logging
