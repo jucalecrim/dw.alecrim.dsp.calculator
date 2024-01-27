@@ -12,9 +12,11 @@ requests
 beautifulsoup4
 plotly
 secure-smtplib
+mime
+email-to
 email
-temp
 backports.tempfile
+temp
 fastapi 
 typing
 pydantic
