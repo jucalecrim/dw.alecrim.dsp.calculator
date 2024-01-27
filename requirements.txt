@@ -14,7 +14,6 @@ plotly
 secure-smtplib
 mime
 email-to
-email
 backports.tempfile
 temp
 fastapi 
