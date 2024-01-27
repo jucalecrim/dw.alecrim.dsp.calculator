@@ -18,7 +18,6 @@ email-validator
 backports.tempfile
 temp
 fastapi 
-typing
 json
 json5
 logging
@@ -30,4 +29,5 @@ azure-mgmt-core==1.4.0
 azure-mgmt-resource==23.0.1
 azure-mgmt-storage==21.1.0
 tempfile
+typing_extensions==4.7.1
 pydantic==1.10.8
