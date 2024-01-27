@@ -14,7 +14,6 @@ plotly
 secure-smtplib
 mime
 email-to
-email-validator
 json
 json5
 logging
@@ -30,4 +29,5 @@ tempfile
 backports.tempfile
 typing_extensions==4.7.1
 pydantic==1.10.8
+#email-validator
 #temp
