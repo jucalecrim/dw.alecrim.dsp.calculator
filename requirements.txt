@@ -30,5 +30,4 @@ azure-mgmt-core==1.4.0
 azure-mgmt-resource==23.0.1
 azure-mgmt-storage==21.1.0
 tempfile
-pydantic @ https://github.com/pydantic/pydantic@main#egg=pydantic
-#pydantic==1.10.8
+pydantic==1.10.8
