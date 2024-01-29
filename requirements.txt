@@ -20,6 +20,7 @@ azure-mgmt-core
 azure-mgmt-resource
 azure-mgmt-storage
 fastapi==0.99.1
+psutil==5.9.0
 #tempfile
 typing
 pydantic==1.10.8
