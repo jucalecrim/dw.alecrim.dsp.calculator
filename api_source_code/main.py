@@ -673,7 +673,9 @@ app = FastAPI()
 
 @app.get("/")
 async def welcome():
-    return {"message": "Welcome this app is up and working!"}
+    return {"message":"Welcome to the Data Savings Calculator",
+            "actions": {"Test all API endpoints":"add /docs to the current URL", "Access the Github repo to see all documentation":"https://github.com/jucalecrim/dw.alecrim.dsp.calculator"},
+            "questions or problems?":"email me at juca@drumwave.com"}
 
 class DSP_structure(BaseModel):
     dsp: str = 'open health'
