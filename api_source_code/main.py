@@ -8,6 +8,7 @@ from dateutil.relativedelta import relativedelta
 from math import ceil
 import numpy as np
 
+
 def name_generator(size, gender = 'random'):
     if size == 0:
         size = random.choice(range(5,80))
@@ -620,7 +621,6 @@ def monetize_dsp(dsp = 'open health', start_date = '2023-01-01', members_start_d
                   n_members = 0, calculation_method = 'alfa', offer_n = 0, offer_p_random = True, min_offer_p = 1000, qi = 100, pt = 0.75,
                   receiver_email = 'jucaluis@gmail.com'):
 
-    # import azure.functions as func
     # import base64
     
     name_df = pd.DataFrame(name_dataset(name_list = name_generator(size=n_members, gender = 'random')))
@@ -665,17 +665,13 @@ def monetize_dsp(dsp = 'open health', start_date = '2023-01-01', members_start_d
 
 
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import HTMLResponse
 from typing import Optional
 from pydantic import BaseModel
 import json
-
+import logging
+import azure.functions as funcs
 app = FastAPI()
-
-@app.get("/")
-async def welcome():
-    return {"message":"Welcome to the Data Savings Calculator",
-            "actions": {"Test all API endpoints":"add /docs to the current URL", "Access the Github repo to see all documentation":"https://github.com/jucalecrim/dw.alecrim.dsp.calculator"},
-            "questions or problems?":"email me at juca@drumwave.com"}
 
 class DSP_structure(BaseModel):
     dsp: str = 'open health'
@@ -732,7 +728,8 @@ def random_name_dataset(name_list: list = name_generator(size = 2, gender = 'ran
 def calc_individual_quota(o: int, n: int, t:int, dim:float, qi:int, qt:float, pt:float, method:str = 'alfa'):
     try:
         output = quota_calculator(o, n, t, dim, qi, qt, pt)
-        return HTTPException(status_code=200, detail="Qa = {}".format(round(output, 5)), headers= round(output, 8))
+        # return HTTPException(status_code=200, detail="Qa = {}".format(round(output, 5)), headers= round(output, 8))
+        return round(output, 8)
     except Exception as exe:
         return HTTPException(status_code=404, detail="ERRO calculando quotas {}".format(exe))
 
@@ -746,9 +743,9 @@ class members_structure(BaseModel):
 
     
 @app.post("/fill_db")
-def members_database(items: members_structure, start_date: str = 'YYYY/MM/DD', start_date_random:bool = True, random_N: bool = True, random_DIM: bool = True): #erro quando a data é diferente de 2023/01/01
+def members_database(items: members_structure, start_date: str = 'YYYY-MM-DD', start_date_random:bool = True, random_N: bool = True, random_DIM: bool = True): #erro quando a data é diferente de 2023/01/01
     try:
-        start_date = "2023-01-01" if start_date == 'YYYY/MM/DD' else start_date #ERRO na DATA
+        start_date = "2023-01-01" if (start_date == 'YYYY/MM/DD') | (start_date == "YYYY-MM-DD") else start_date #ERRO na DATA
         output = fill_db(members = items.members, plan_info = items.plan_info, start_date = datetime.strptime(start_date, "%Y-%m-%d"), start_date_random = start_date_random, random_N = random_N, random_DIM = random_DIM)
         print(output.head())
         return HTTPException(status_code=200, detail="Deu BOM receba seu DF", headers= pd.DataFrame(output).to_json(orient = 'index'))
@@ -759,7 +756,7 @@ def members_database(items: members_structure, start_date: str = 'YYYY/MM/DD', s
 @app.get("/sp_stocks")
 def get_stocks():
     try:
-        return HTTPException(status_code=200, detail="Here are your stocks: ", headers = pd.DataFrame(sp_stocks()).to_json(orient = "index"))
+        return  HTTPException(status_code=200, detail="Here are your stocks: ", headers = pd.DataFrame(sp_stocks()).to_json(orient = "index"))
     except Exception as exe:
         return HTTPException(status_code=404, detail="ERROR getting stocks {}".format(exe))
 
@@ -776,9 +773,8 @@ def random_offers(items: off_info, dsp_target: str = 'open health', price: float
     except Exception as exe:
         return HTTPException(status_code=404, detail="No offers for you my friend =( {}".format(exe))
     
-    
 @app.post('/multiple_offer_loop')
-def off_loop(plan_info: dict, length: int = 5, rand_price: bool = True, price:int = 100):
+def off_loop(plan_info: dict = {'open health': {'id': 'HC_001', 'category': 'health care', 'ns': ['CBC', 'CEA', 'GL'], 'start_date': '2023-01-01', 'payment_freq_M': 12}}, length: int = 5, rand_price: bool = True, price:int = 100):
     try:
         output = offer_loop(plan_info = plan_info, length = length, rand_price = rand_price, price = price)
         return HTTPException(status_code=200, detail="Here are your offers: ", headers = output)
@@ -950,6 +946,18 @@ def ds_html(items: def_html, members_full_df: bool = False):
         print(exe)
         return HTTPException(status_code=404, detail="ERROR generating your DSP HTML due to {}".format(exe))
 
+# @app.get("/items/", response_class=HTMLResponse)
+# async def read_items():
+#     return """
+#     <html>
+#         <head>
+#             <title>Some HTML in here</title>
+#         </head>
+#         <body>
+#             <h1>Look ma! HTML!</h1>
+#         </body>
+#     </html>
+#     """
 
 ##TO-DO
 #publicar a API - ver vídeo
