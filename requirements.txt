@@ -9,7 +9,6 @@ mpmath
 numpy
 requests
 beautifulsoup4
-plotly
 secure-smtplib
 json5
 azure-common
@@ -21,7 +20,13 @@ azure-mgmt-resource
 azure-mgmt-storage
 fastapi==0.99.1
 psutil==5.9.0
+nbconvert==5.4.0
+ipywidgets
+#python-kaleido
+#plotly-orca
+#plotly
 #tempfile
+matplotlib
 typing
 pydantic==1.10.8
 #logging
