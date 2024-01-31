@@ -1,0 +1,73 @@
+Ngrok
+
+1- Launch Anaconda Prompt
+cd "C:\Users\Usuario\Documents\GitHub\dw.alecrim.dsp.calculator\api_source_code"
+
+2- Load app localy
+python -m uvicorn main:app --reload
+
+3- find ngrok
+cd "C:\Users\Usuario\Downloads"
+
+4- Find Config
+https://dashboard.ngrok.com/get-started/your-authtoken
+
+5- add config
+ngrok config add-authtoken 2bVYVy9xSUADTMwTCgYKekb7hDs_hpZcqPPVbSqEYhffzDHm
+
+5- load port
+ngrok.exe http 8000
+
+6- Get link
+
+ngrok  key api dsp_calc: 2bVZd6bJdBc8g1D5g4Eaz45nGA2_7oV6TT4fBkQRBPs13BWfD
+
+api url: https://2ee5-191-255-3-43.ngrok-free.app/docs#
+
+
+Azure Container
+0 - Have your code and requirements file updated
+1 - Open pycharm from anaconda cmd
+	start pycharm
+2 - Run your script localy to check if its working
+	cd api_source_code
+	python -m uvicorn main:app --reload
+3 - Return to product directory 
+	cd..
+4 - create an image (or delete a previous one before creating)
+	docker build -t myimage .
+5 - run the container
+	docker run -d --name mycontainer -p 80:80 myimage 
+5.1 - if nedded stop the current container
+	 docker stop -t 60 mycontainer 
+6 - Check if app is up and running in local host (check the port, usually default 80)
+	localhost
+7 - Get Azure credentials
+	login azure container registry
+	copy login "Login server"
+	copy username "username"
+	copy password "password"
+	docker login <server_name> -u <username> -p <password>
+8 - Login docker with Azure
+	docker login dspcontainer.azurecr.io -u dspcontainer -p ctp8wd4bgUCTkhi1dGygfvVpFUy+dQjsPVzPZ/ftk/+ACRB5UPgh
+9 - Create build tag
+	docker build -t <server_name>/container_name:build-tag .
+	docker build -t dspcontainer.azurecr.io/dsp_calc_container:build-tag-1 .
+10 - Push container tag
+	docker push <full_tag>
+	docker push dspcontainer.azurecr.io/dsp_calc_container:build-tag-1
+11 - Check new tag in "Repositories" in Azure
+	
+12 - Create Container Instance in Azure related to the new tag
+
+13 - Run the instance and test
+
+
+
+azure vm
+
+username: dsp_vm
+password: Drumwave!234
+
+
+gunicorn -w 2-k uvicorn.workers.UvicornWorker main:app
