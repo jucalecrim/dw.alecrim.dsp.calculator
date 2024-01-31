@@ -1,5 +1,5 @@
 <html>
-<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style="font-size:19px;font-family:Algerian;"><img width="149" src="https://github.com/jucalecrim/dw.alecrim.dsp.calculator/edit/main/docs/img/Logo.png" alt="DrumWave Logo"></span></p>
+<img src="https://github.com/jucalecrim/dw.alecrim.dsp.calculator/blob/main/docs/img/Logo.png" width="150" height="120">
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style="font-size:19px;font-family:Algerian;">Hello my DrumWave Friends,</span></p>
 <h1 style='margin: 12pt 0cm 0cm; font-size: 21px; font-family: "Calibri Light", sans-serif; color: rgb(47, 84, 150); font-weight: normal; --darkreader-inline-color: #7eaad7;' data-darkreader-inline-color=""><strong><span style='font-family: "Arial Black", sans-serif; color: red; --darkreader-inline-color: #ff1a1a;' data-darkreader-inline-color="">Welcome to the Data Savings Calculator</span></strong></h1>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style='font-family:"Bahnschrift SemiBold SemiConden",sans-serif;'>&nbsp;</span></p>
