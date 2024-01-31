@@ -239,10 +239,15 @@ def offer_loop(plan_info, length, rand_price, price):
         dicty[list(rog.keys())[0]] = rog
     return dicty
 
-def plot_graph(qa_df, path, n_bars = 10):
-    import plotly.express as px
-    import plotly.io as bpm
-
+def plot_graph(qa_df, path, n_bars = 5):
+    import matplotlib.pyplot as plt
+   
+    fig, ax = plt.subplots()
+    font_dict = {'fontsize': 15,  'color': 'blue'}
+    ax.set_ylabel('Count', font_dict)
+    ax.set_xlabel('Cash', font_dict)
+    ax.set_title('Monetization Distribution', {'fontsize': 20,  'fontweight': 'bold', 'color': 'green'})
+    
     height = list(qa_df['cash'])
     limit = max(height)/n_bars
     limit = int(round(limit, 0) if limit < 100 else round(limit, -1)) #possible error
@@ -254,22 +259,21 @@ def plot_graph(qa_df, path, n_bars = 10):
         # bar.append(sum((height > limit_list[i-1]) & (height <= limit_list[i])))
         test =  sum([(j >  limit_list[i-1]) & (j <= limit_list[i]) for j in height])
         bar.append(test)
-    # y_pos = np.arange(len(bar)
-    bpm.orca.config.save()
-    fig = px.bar(pd.DataFrame({"Cash":np.array(limit_list), "Count":np.array(bar)}), x="Cash", y="Count")
-    fig.update_traces(marker_color='green')
-    fig.update_layout(
-        font_family="Courier New",
-        font_color="blue",
-        title_font_family="Times New Roman",
-        title_font_color="blue",
-        title_font_size =36,
-        legend_title_font_color="green",
-        title_text="Monetization Distribution", title_x=0.5
-    )
-    fig.show()
-    if path != "C:\\user\\img.png":
-        fig.write_image(path, engine= 'orca')
+
+    if (n_bars <= 5) :
+        width = 50
+    elif (n_bars > 5) & (n_bars <= 10):
+        width = 20
+    else:
+        width = n_bars*3 
+        
+    ax.bar(limit_list, bar,width=width, bottom=False, align='center')
+
+
+    if path != "img.png":
+        plt.savefig(path)
+        plt.show()
+        plt.close(fig)
 
 def find_member_offer(offer_db, members_ns_db):
     dicty = {}
@@ -618,7 +622,7 @@ def send_html_email(to_email, subject, html_content, attachment_path):
         return 500
 
 def monetize_dsp(dsp = 'open health', start_date = '2023-01-01', members_start_date_random = True, members_full_df = False, random_N = True, random_DIM = True,
-                  n_members = 0, calculation_method = 'alfa', offer_n = 0, offer_p_random = True, min_offer_p = 1000, qi = 100, pt = 0.75,
+                  n_members = 0, calculation_method = 'alfa', offer_n = 0, n_bars = 5, offer_p_random = True, min_offer_p = 1000, qi = 100, pt = 0.75,
                   receiver_email = 'jucaluis@gmail.com'):
 
     # import base64
@@ -652,10 +656,10 @@ def monetize_dsp(dsp = 'open health', start_date = '2023-01-01', members_start_d
     calc_dicty['offer_html'] = offer_htmls        
     
     from tempfile  import gettempdir
-    dir_temp = gettempdir() + '\\img.jpg'
-    # dir_temp = gettempdir() + '\\img.html'
+    dir_temp = gettempdir() + '\\img.png'
+    # dir_temp = 'img.pdf'
     
-    plot_return = plot_graph(qa_df = calc_dicty.get('qa_df').sort_values('cash'), path = dir_temp, n_bars = 10)
+    plot_return = plot_graph(qa_df = calc_dicty.get('qa_df').sort_values('cash'), path = dir_temp, n_bars = n_bars)
     print(plot_return)
 
     plan_html = dsp_html(plan_info, calc_dicty, members_full_df)
@@ -673,6 +677,13 @@ import logging
 import azure.functions as funcs
 app = FastAPI()
 
+@app.get("/")
+async def welcome():
+    return {"message":"Welcome to the Data Savings Calculator",
+            "actions": {"Test all API endpoints":"add /docs to the current URL", "Access the Github repo to see all documentation":"https://github.com/jucalecrim/dw.alecrim.dsp.calculator"},
+            "questions or problems?":"email me at juca@drumwave.com"}
+
+
 class DSP_structure(BaseModel):
     dsp: str = 'open health'
     start_date: str ='2023-01-01'
@@ -682,6 +693,7 @@ class DSP_structure(BaseModel):
     random_DIM: bool = True
     n_members: Optional[int] = 0 #0 is random
     calculation_method: str = 'alfa'
+    n_bars: int = 5
     offer_n: Optional[int] = 0
     offer_p_random: bool = True
     min_offer_p: int = 1000
@@ -696,7 +708,7 @@ def dsp_email_response(item: DSP_structure):
         
         result = monetize_dsp(dsp = item.dsp, start_date = item.start_date, members_start_date_random = item.members_start_date_random, members_full_df = item.members_full_df, 
                               random_N = item.random_N, random_DIM = item.random_DIM,
-                      n_members = item.n_members, calculation_method = item.calculation_method, offer_n = item.offer_n, offer_p_random = item.offer_p_random, min_offer_p = item.min_offer_p,
+                      n_members = item.n_members, calculation_method = item.calculation_method, n_bars = item.n_bars, offer_n = item.offer_n, offer_p_random = item.offer_p_random, min_offer_p = item.min_offer_p,
                       qi = item.qi, pt = item.pt, receiver_email = item.receiver_email)
         print(result)
         
@@ -794,7 +806,7 @@ class PLT_structure(BaseModel):
                     ],
                     "cash": [50.50, 200.72, 700.20, 500.44, 300.97, 340.74]
                   }
-    path: str = "C:\\user\\img.png"
+    path: str = "img.png"
     n_bars: Optional[int] = 5
     
 @app.post('/plot_g')
