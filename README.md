@@ -9,7 +9,7 @@
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style='font-family:"Bahnschrift SemiBold SemiConden",sans-serif;'>If by any chance, there is a problem running the API please message me in slack and ill figure it out. It could be just a glitch in the container I’ve deployed.</span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style='font-family:"Bahnschrift SemiBold SemiConden",sans-serif;'>To get started with testing the API endpoints try to access one of the following links below:</span></p>
 <ul class="decimal_type" style="list-style-type: undefined;">
-    <li><span style='font-family:"Bahnschrift SemiBold SemiConden",sans-serif;'>Ngrok URL:&nbsp;</span><a href="https://02c9-2804-431-c7f5-eed-2913-4f83-52d1-8dec.ngrok-free.app/">02c9-2804-431-c7f5-eed-2913-4f83-52d1-8dec.ngrok-free.app</a></li>
+    <li><span style='font-family:"Bahnschrift SemiBold SemiConden",sans-serif;'>Ngrok URL:&nbsp;</span><a href="https://02c9-2804-431-c7f5-eed-2913-4f83-52d1-8dec.ngrok-free.app/">https://6cd8-187-37-7-83.ngrok-free.app/</a></li>
     <li><span style='font-family:"Bahnschrift SemiBold SemiConden",sans-serif;'>Docker Container URL:&nbsp;</span><a href="http://4.236.198.144/"><span style='font-family:"Bahnschrift SemiBold SemiConden",sans-serif;'>http://4.236.198.144/</span></a></li>
 </ul>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style='font-family:"Bahnschrift SemiBold SemiConden",sans-serif;'>Soon I’ll share my findings!</span></p>
